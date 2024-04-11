@@ -116,18 +116,125 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
       
     - 매개변수 출력형식(216p)
     ```cs
-    ublic static void Divide (int a, int b, out int quotient, out int remainder)
+    public static void Divide (int a, int b, out int quotient, out int remainder)
     ``` 
-    - 메서드 오버로딩 : 여러 타입으로 같은 처리를 하는 메서드를 여러개 만들때
+    - 메서드 오버로딩(219p) : 여러 타입으로 같은 처리를 하는 메서드를 여러개 만들때
     ```cs
-    
+        public static int Plus(int a, int b)
+      {
+        return a + b;
+      }
+
+    public static float Plus(float a, float b) 
+      {
+        return a + b;
+      }
+
     ``` 
-    - 매개변수 가변길이 : 매개변수 개수를 동적으로 처리할 때
+    - 매개변수 가변길이(222p) : 매개변수 개수를 동적으로 처리할 때
     ```cs
-    
+        public static int Sum(params int[] argv)
+      {
+        int sum = 0;
+        foreach (int item in argv)
+        {
+            sum += item;
+        }
+        return sum;
+      }
+
     ``` 
-    - 명명된 매개변수 : 매개변수 값 미할당 시 기본값으로 지정
-    ```cs
-    
-    ```      
+    - 명명된 매개변수(224p) : 매개변수 값 미할당 시 기본값으로 지정
+      ```cs
+      public static void PrintProfile(string name, string phone)
+      {
+          Console.WriteLine($"이름 : {name}, 핸드폰 : {phone}");
+      }
+
+      PrintProfile(phone: "010-1234-5678", name: "홍길동"); // 매개변수 순서를 지정 가능
+      ```
+
+    - 기본값 매개변수 > 매개변수 값을 미할당 시 기본값 지정
+
+      ```cs
+      public static void DefaultMethod(int a = 1, int b = 0)
+      {
+          Console.WriteLine($"DefaultMethod = {a}, {b}");
+      }
+      DefaultMethod(10, 8); // a = 10, b = 8
+      DefaultMethod(6); // a = 6, b = 0
+      DefaultMethod(); // a = 1, b = 0
+
+      ```      
   
+- 클래스 
+  - c++의 클래스, 객체와 유사(문법이 다소 상이)
+  - 생성자는 new로 사용해서 객체 생성
+  - 종료자는 C#에서 거의 사용안함
+  - 생성자 오버로딩 -> 파라미터 개수에 따라서 사용가능, 기본적인 메서드 오버로딩하고 기능 동일
+  - this 키워드 : this. (C++에서는 this->)
+
+  - 접근 한정자
+    - public : 클래스 내부/외부 접근 가능 
+    - protected : 클래스 외부에서 접근 불가하며, 퍄생클래스에서는 접근 가능 (default)
+    - private : 클래스 내부에서 접근 불가하며, 파생클래스에서는 접근 불가 
+    - internal : 같은 어셈블리에 있는 코드에서만 public으로 접근 가능
+    - protected internal : 같은 어셈블리에 있는 코드에서는 protected로 접근 가능 
+    - private protected : 같은 어셈블리에 있는 클래스에서 상송받은 클래스 내부에서만 접근 할 수 있습니다. 
+  - C#에는 다중상속은 없다 => C++ 다중상속으로 생기는 문제점을 해결하기 위해서 다중상속을 아예 없앰
+    - 다중상속 해결 => 인터페이스 
+    ```cs
+    // 부모클래스 
+    class BaseClass {
+
+    }
+    // 파생클래스(자식클래스)
+    class DerivedClass : BaseClass{
+
+    }
+    ```
+
+  - 구조체
+    - 객체지향이 없었을 때, 좀 더 객체지향적인 프로그래밍을 위하여 만들어진 부분이다
+    - class 이후로 사용빈도가 많이 줄어든 키워드 
+    - 구조체는 스택(값형식). 클래스는 힙(참조형식)
+    - C#에서는 구조체 안써도 됨
+
+  - 튜플 (C# 7.0 이후 반영)
+    - 한꺼번에 여러 개의 데이터를 리턴하거나 전달할 때 유용 
+    - 값 할당 후 변경 불가
+
+  - 인터페이스(315p) 
+    - 클래스는 객체의 청사진, 인터페이스는 클래스의 청사진이다
+    - 인터페이스는 클래스가 어떠한 메서드를 가져야하는지를 약속하는 것
+    - 다중상속의 문제를 단일 상속으로도 해결하게 만든 주체
+    - 인터페이스는 명명할때 제일 앞에 I를 적음 
+    - 인터페이스의 메서드에는 구현을 작성하지 않음
+    - 인터페이스는 약속
+      - 클래스는 상속 시 별다른 문제 없으나, 인터페이스는 구현시 약속을 지키지 않으면 오류표시
+    - 클래스는 '상속한다', 인터페이스는 '구현한다'
+    - 인터페이스에서 약속한 메서드를 구현 안하면 빌드 불가! 
+    ![인터페이스설명](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs001.png)
+
+- 추상 클래스(abstract) 
+  - Virtual method하고도 유사 
+  - 추상 클래스를 단순화 시키면 인터페이스라 볼 수 있다
+  
+❗ Alt + Enter  - 로잘린 VS 개발 서포터
+![단축키](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs002.png)
+  - 오류 / 빈곳에서 사용 / 정상 구문에도 사용가능 
+
+- 프로퍼티(340p)
+  - 클래스의 멤버변수 변형. 사용방법이 일반 변수와 유사함
+  - 멤버변수의 접근제한자를 public으로 했을때 객체지향적 문제점(코드오염 등)을 해결하기 위해 사용
+  - GET 접근자 / SET 접근자
+  - SET은 값 할당시에 잘못된 데이터가 들어가지 않도록 막아야함 
+  - JAVA에서 GETTER 메서드 / SETTET 메서드로 사용함 
+
+## 2일차 
+- 컬렉션(배열, 리스트, 인덱서)
+- 일반화(Generic) 프로그래밍  
+- 예외처리
+- 대리자와 이벤트
+- 람다식
+- 애트리뷰트
