@@ -100,7 +100,7 @@ namespace ex09_delegators
 
             notifier.EventOccured = new Notify(listener2.SomethingHappened) + new Notify(listener3.SomethingHappened);
             notifier.EventOccured("미사일 발사!"); 
-            Console.WriteLine();
+            Console.WriteLine(); // 윈폼(PyQt 등) 이벤트도 이와 유사한 형태로 동작함❗
 
 
             #region "버블 대리자 코드 영역"

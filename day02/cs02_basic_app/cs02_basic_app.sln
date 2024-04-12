@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex09_exceptionhandlings", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex09_delegators", "ex09_delegators\ex09_delegators.csproj", "{C4DB5D7A-35F8-464D-986B-B00D940CF6AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex11_events", "ex11_events\ex11_events.csproj", "{C945D70C-AADB-4F10-A6EA-A504E709D2A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C4DB5D7A-35F8-464D-986B-B00D940CF6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4DB5D7A-35F8-464D-986B-B00D940CF6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4DB5D7A-35F8-464D-986B-B00D940CF6AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C945D70C-AADB-4F10-A6EA-A504E709D2A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C945D70C-AADB-4F10-A6EA-A504E709D2A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C945D70C-AADB-4F10-A6EA-A504E709D2A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C945D70C-AADB-4F10-A6EA-A504E709D2A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
