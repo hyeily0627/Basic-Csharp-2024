@@ -31,9 +31,12 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
   - OS 독립적인 새로운 틀을 제작 하기 시작(2022년~) => .NET5.0
   - (24년 4월 기준) .NET 8.0
   - C/C++ Gcc 컴파일러, JAVA JDK, C# .NET5.0 이상 필요함
-  - 이제는 신규 개발시, .NET Framework 사용하지 말 것! 
+  - 이제는 신규 개발시, **.NET Framework** 사용하지 말 것! 
 
 - 시작하기
+  - Visual Studio 시작
+  - 프로젝트 - 프로그램 개발 최소단위 그룹
+  - **솔루션 - 프로젝트의 묶음**
   - Visual Basic 템플릿 설정 : C# / 모든 플랫폼 / 콘솔
     ```cs
     namespace hello_world // 프로그램 소스의 가장 큰 단위가 namespace == project 
@@ -71,7 +74,7 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
 - 흐름제어
     - C++과 동일
     - if, switch, while, for, break, goto, continue 동일
-    - C#에는 foreach가 존재 -> 파이썬의 for item in []  과 동일
+    - **C#에는 foreach**가 존재 -> 파이썬의 for item in []  과 동일
       ```cs
       int[] arr = { 1, 2, 3, 4, 5 };
       
@@ -224,7 +227,7 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
 ![단축키](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs002.png)
   - 오류 / 빈곳에서 사용 / 정상 구문에도 사용가능 
 
-- 프로퍼티(340p)
+- **프로퍼티(340p)**
   - 클래스의 멤버변수 변형. 사용방법이 일반 변수와 유사함
   - 멤버변수의 접근제한자를 public으로 했을때 객체지향적 문제점(코드오염 등)을 해결하기 위해 사용
   - GET 접근자 / SET 접근자
@@ -232,9 +235,79 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
   - JAVA에서 GETTER 메서드 / SETTET 메서드로 사용함 
 
 ## 2일차 
+- TIP🚨
+  - C# 빌드 시 오류 : 빌드 실행 후 실행창 안끄고 다시 빌드할 경우, 오류 발생(빌드 실패 경고창이 떠서 아니요 누르면 아래와 같이 오류 발생)
+  ![빌드오류](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs003.png)
+  - 1. 위 경우는 콘솔창이 떴기때문에 콘솔을 닫으면 되지만, 그렇지 않을 경우, (ctrl + shift + Esc)작업관리자 - 세부정보 - 해당 프로젝트 작업 끝내기 
+  - 2. 재빌드 하기 
+
 - 컬렉션(배열, 리스트, 인덱서)
-- 일반화(Generic) 프로그래밍  
+  - 배열(375p) 
+    - 모든 배열은 System.Array 클래스를 상속한 하위 클래스
+    - 기본적인 배열의 사용법은 Pytion 리스트와도 동일하다
+    - 배열 분할은 C# 8.0부터 적용 되었으며, 파이썬의 배열 슬라이스를 도입함
+  - 컬렉션 : 파이썬의 리스트, 스택, 큐, 리스트와 동일
+    - ArrayList
+    - Stack
+    - Queue
+    - Hashtable(==Dictionary) 405p
+  - foreach를 사용할 수 있는 객체로 만들기 - yield 
+
+- 일반화(Generic) 프로그래밍(423p)
+  - 파이썬 -> 변수에 제약사항 없음
+  - 타입의 제약을 해소하고자 만든 기능 - ArrayList 등이 해결해줄 수 있지만, 박싱(언박싱)등의 성능문제가 있음
+  - **하나의 타입으로 여러 타입의 처리를 해줄 수 있는 프로그래밍 방식** 
+  - 일반화 컬렉션
+    - List<T>
+    - Stack<T>,Queue<T>
+    - Dictionary<Tkey, Tvalue>
+
 - 예외처리
-- 대리자와 이벤트
+  - 소스코드상 문법적 오류 -> 오류(Error)
+  - 실행 중 생기는 오류 -> 예외(Exception)
+  ```cs
+  try
+      {
+      // ..예외가 발생할 것 같은 소스코드
+      }
+  catch(Exception ex) // 모든 예외클래스의 조상이 Exception이므로 어떤 예외코드를 써야하는지 모르겠으면 Exception 사용
+      {
+          Console.WriteLine(ex.Message);
+      }
+  finally
+      {
+          Console.WriteLine("프로그램 종료!")
+      }
+  ```
+
+- '대리자'와 이벤트(494p)
+  - 메서드 호출시 매개변수 전달
+  - 대리자 호출 시 함수(메서드) 자체를 전달
+  - 이벤트 : 컴퓨터 내에서 발생하는 객체의 사건들 
+  - delegate --> event 
+  - 윈폼 개발 --> 이벤트(Event driven)프로그래밍 
+
+- TIP🚨  
+  - C# 주석 중 영역을 지정할 수 있음 => **#region ~ #endregion**
+  ![영역접기전](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs004.png)
+  ![영역접기후](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs005.png)
+
+
+## 3일차 
 - 람다식
+
+- LINQ
+
 - 애트리뷰트
+
+- dynamic 형식(파이썬 실행)
+
+- winform UI 개발 + (파일, 스레드)
+
+- 가비지 컬렉션 
+
+- 네트워크 프로그래밍 
+
+- WPF
+
+- 예제프로젝트 
