@@ -52,6 +52,12 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
     }
     ```
 
+- TIP🚨
+  - 솔루션에서 오른쪽 버튼 > 속성 > 현재 선택 영역 체크 
+  - 이렇게 해야 프로젝트 새로 생성할때 선택이 되어서 디버깅 혼선이 안생김
+
+- TIP🚨 : F2 이름 바꾸기 
+
 - 변수와 상수
     - C++과 동일하므로 PASS
     - 모든 C#의 객체는 object를 조상으로 함(68p)
@@ -280,10 +286,11 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
       }
   ```
 
-- '대리자'와 이벤트(494p)
+- '대리자'와 이벤트(494p) 
   - 메서드 호출시 매개변수 전달
   - 대리자 호출 시 함수(메서드) 자체를 전달
-  - 이벤트 : 컴퓨터 내에서 발생하는 객체의 사건들 
+  - 이벤트 : 컴퓨터 내에서 발생하는 객체의 사건들(번개모양) 
+  - 익명 메서드 사용 
   - delegate --> event 
   - 윈폼 개발 --> 이벤트(Event driven)프로그래밍 
 
@@ -294,18 +301,74 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
 
 
 ## 3일차 
-- 람다식
+- 람다식 : 익명 메서드를 만드는 방식 중에 하나 - delegate, lambda expression
+  - 익명 메서드, 프로퍼티 사용시 코딩량을 줄여줌 
+  - 대신 익명메서드 사용시 마다 대리자를 선언해야하기때문에 사용하는 Func와 Action 
+    - Func와 Action 는 ms에서 미리 만들어둠
 
-- LINQ
+- LINQ((Language-INtegrated Query)) : 데이터 질의(Query) 기능을 C#에서 사용할 수 있는 기술로, C#의 배열, 컬렉션, XML, DataSet 등... 에서 내가 원하는 데이터만 가져오고 싶은 경우 사용할 수 있는 기술
+  - DB SQL과 데이터 질의기능이 동일하다. 
+  - 다른점 1번 : Group by에 집계함수가 필수가 아닌 것 외에는 SQL과 사용이 거의 동일
+  - 다른점 2번 : 키워드 사용순서가 다른 것은 인지! 
+  - LINQ만 고집하지 말고, 일반적인 C# 로직을 사용하는 방안도 항상 고려해두기
 
-- 애트리뷰트
+- 리플렉션 (Reflection) : 애플리케이션을 개발할 때, 디버깅 또는 런타임에 알 수 없는 객체의 동작을 분석하기 위해 사용하거나 외부 라이브러리에 존재하는 클래스 및 메서드를 분석하는 목적으로 사용
+
+- 애트리뷰트 
+  ```cs
+  class MyClass
+  {
+      [Obsolete("OldMethod는 오래되었습니다. NewMethod()를 이용하십시오.")]
+      public void OldMethod()
+      {
+          Console.WriteLine("old version...");
+      }
+      
+      public void NewMethod()
+      {
+          Console.WriteLine("new version...");
+      }
+  }
+  ```
+
+- TIP🚨
+  -  Summary 기능 
+  -  클래스 상속, 생성 등을 통해 가져와서 쓰는데 저 메소드, 프로퍼티등이 뭐였지 할 때 설명가능함
+  ![서머리](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs006.png)
+  - **/// <summary> ///</summary> 사이에 메소드 설명 작성**
+  - **///<param> ///</param> 사이에 파라미터 설명 작성** 
+
 
 - dynamic 형식(파이썬 실행)
+  - COM 객체 사용
+  - IronPython 라이브러리 사용 : python을 C#에서 사용할 수 있도록 해주는 오픈소스 라이브러리
+  - Nuget Package : 파이썬의 pip같은 라이브러리 관리툴
+    - 1번 / 해당 프로젝트 > 종속성 > 마우스 오른쪽 버튼 > Nuget Package 관리 > 찾아보기 IronPython 검색 > 설치 
+    - 2번(1번 안되는경우) / 도구 > Nuget Package 관리 > 패키지 관리자 콘솔 > 패키지소스 nuget.org , 기본프로젝트를 적용해야하는 것으로 설정 > Install-Package IronPython 입력
+    1. 파이썬 엔진 / 스코프 / 설정경로 생성 
+    2. 해당 컴퓨터 파이썬 경로들을 설정 
+    3. 실행 시킬 파이썬 파일의 경로를 지정 
+    4. 파이썬 실행(scope 연결) 
+    5. 해당 파이썬 함수를 Func 또는 Action으로 매핑 후, 매핑 시킨 메서드를 실행 
 
-- winform UI 개발 + (파일, 스레드)
+- 가비지 컬렉션(GC : Garbage Collection)
+  - C나 C++은 메모리 사용시 개발자가 직접 메모리 해제를 해야함
+  - C#, JAVA, Python 등의 객체지향 언어는 Garbage Collection 기능으로 프로그램이 직접 관리
+  - C#으로는 딱히 적용하거나, 실행 할 것이 없음! 
 
-- 가비지 컬렉션 
+- Winform UI 개발 + (파일, 스레드)
+  - 이벤트, 이벤트 핸들러 (대리자, 이벤트 연결)
+  - 그래픽 사용자 인터페이스를 만드는 방법
+  1. Winforms(Windows Forms) 
+  2. WPF(Windows Presentation Foundation)
+  - 위지위그(WYSIWYG: What You See Is What You Get, "보는 대로 얻는다") 방식의 GUI 프로그램 개발  
+- Setting 
+  - 새프로젝트 - C# / 모든 플랫폼 / 데스트톱 
+  - 프로젝트 - 추가 - 웹에 양식 클릭 
+  - 상단 도구상자 클릭해서 세팅 / F4 누르면 속성 
+- ❗Designer.cs는 웬만하면 건들지 말기(마우스로 세팅 가능한데 굳이 코드 건드릴 필요XX )
 
+## 4일차
 - 네트워크 프로그래밍 
 
 - WPF
