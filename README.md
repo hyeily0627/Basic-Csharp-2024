@@ -240,6 +240,7 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
   - SET은 값 할당시에 잘못된 데이터가 들어가지 않도록 막아야함 
   - JAVA에서 GETTER 메서드 / SETTET 메서드로 사용함 
 
+
 ## 2일차 
 - TIP🚨
   - C# 빌드 시 오류 : 빌드 실행 후 실행창 안끄고 다시 빌드할 경우, 오류 발생(빌드 실패 경고창이 떠서 아니요 누르면 아래와 같이 오류 발생)
@@ -366,9 +367,46 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
   - 새프로젝트 - C# / 모든 플랫폼 / 데스트톱 
   - 프로젝트 - 추가 - 웹에 양식 클릭 
   - 상단 도구상자 클릭해서 세팅 / F4 누르면 속성 
-- ❗Designer.cs는 웬만하면 건들지 말기(마우스로 세팅 가능한데 굳이 코드 건드릴 필요XX )
+  - ❗Designer.cs는 웬만하면 건들지 말기(마우스로 세팅 가능한데 굳이 코드 건드릴 필요XX )
+
 
 ## 4일차
+- Winform UI 개발 기본
+  - Winforms 개발 학습 
+  - 컨트롤 Prefix
+    - ComboBox : Cbo
+    - CheckBox : Chk
+    - RadioButton : Rdo
+    - TextBox : Txt 
+    - Button : Btn
+    - TrackBar : Trb
+    - ProgressBar : Prg
+    - TreeView : Trv
+    - ListView : Lsv
+    - PictureBox : Pic 
+    - ~Dialog : Dlg
+
+
+- 🚨주의 사항 및 참고 사항 
+  - 속성 : Alt + Enter 
+  - Ctrl + Shift + S 하면 켜져있는 모든 창 저장
+  - ❗programs.cs도 건들지 않는다
+  - 컨트롤 폼에 배치한 후에 더블클릭 금지!! -> 클릭 이벤트 들어가서 골아파짐 
+  - 이벤트 생성 후, 삭제하고 싶으면 이벤트 창에서 이름 지우고 delete + enter(designer.cs에서 사라짐) -> Main.cs에서 내용 지우기
+  - F6으로 빌드 실행하여 오류 없는 지 확인하고 Ctrl + F5 하기! 
+
+
+## 5일차 
+- Winform UI 개발 기본
+  - 스레드 
+  - 파일입출력
+  - 비동기 작업 앱
+  - 윈도우 참색기 앱 
+  - 도서관리 앱 With SQL Server
+  - ModernUI 앱 
+  - 국가교통정보센터 CCTV 뷰 앱 
+  - IoT Dummy 앱 with SQL Server 
+
 - 네트워크 프로그래밍 
 
 - WPF
