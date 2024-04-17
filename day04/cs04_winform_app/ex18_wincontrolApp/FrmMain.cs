@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.Threading;  // 스레드 클래스 사용등록
+
 namespace ex18_wincontrolApp
 {
     public partial class FrmMain : Form
@@ -177,7 +180,7 @@ namespace ex18_wincontrolApp
         {
             DlgOpenImage.Title = "Open Image";
             DlgOpenImage.Filter = "Image Files(*.bmp;*.jpg;*.png;*.jpeg)|*.bmp;*.jpg;*.png;*.jpeg"; // Filter는 확장자를 이미지로만 한정 
-            var res = DlgOpenImage.ShowDialog(); 
+            var res = DlgOpenImage.ShowDialog();
             if (res == DialogResult.OK)
             {
                 //MessageBox.Show(DlgOpenImage.FileName.ToString());
@@ -186,7 +189,7 @@ namespace ex18_wincontrolApp
         }
         private void PicNormal_Click(object sender, EventArgs e)
         {
-            if(PicNormal.SizeMode == PictureBoxSizeMode.Normal)
+            if (PicNormal.SizeMode == PictureBoxSizeMode.Normal)
             {
                 PicNormal.SizeMode = PictureBoxSizeMode.StretchImage;
             }
@@ -196,6 +199,159 @@ namespace ex18_wincontrolApp
             }
         }
         #endregion
-    }
 
+        #region ㅇㅇㅇ
+        /* 파일 로드 이벤트 핸들러 */
+        private void BtnFileLoad_Click(object sender, EventArgs e)
+        {
+            // OpenFileDialog 컨트롤을 디자인에서 구성하지 않고 생성하는 방법
+            OpenFileDialog dialog = new OpenFileDialog(); // 디자인에서 OpenFileDialog 생성 안해도 OK
+
+            // 파일을 여러개 선택하는 작업 금지!
+            // 디자인 속성에서 Multiselect 변경과 동일한 방법
+            dialog.Multiselect = false;
+            dialog.Filter = "Text Files(*.txt; *.cs; *.py) | *.txt; *.cs; *.py";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                // UTF-8로 인코딩 된 파일을 로드하면 한글이 깨짐
+                // EUC-KR(Window 949), UTF-8(BOM)은 깨지지 않음
+                RtxEditor.LoadFile(dialog.FileName, RichTextBoxStreamType.PlainText);
+            }
+        }
+
+        /* 리치 텍스트 파일로 저장하는 이벤트 핸들러 */
+        private void BtnFileSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+
+            // rtf는 MS 워드에서 열리는 확장자
+            dialog.Filter = "RichText Files(*.rtf) | *.rtf";
+
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                RtxEditor.SaveFile(dialog.FileName, RichTextBoxStreamType.RichNoOleObjs);
+            }
+        }
+
+
+        #endregion
+        private void BtnNoThread_Click(object sender, EventArgs e)
+        {
+            // 프로그래스바 설정
+            var maxValue = 100;
+            var currValue = 0;
+            PrgProcess.Value = 0; // 프로그래스 밸류를 0으로 초기화
+            PrgProcess.Minimum = 0;
+            PrgProcess.Maximum = maxValue;
+
+            BtnNoThread.Enabled = false;
+            BtnNoThread.Enabled = false;
+            BtnStop.Enabled = true;
+
+            // 반복시작
+            for (var i = 0; i <= maxValue; i++)
+            {
+                // 내부적으로 복잡하고 시간이 많이 필요한 작업
+                currValue = i;
+                PrgProcess.Value = currValue;
+
+                // 텍스트 박스에 스레드 진행상태 표시
+                TxtLog.AppendText($"진행중 : {currValue}\r\n");
+                Thread.Sleep(500); // 1000ms = 1초, 500ms = 0.5초
+            }
+
+            // 작업이 끝났으니 버튼 상태 변경
+            BtnNoThread.Enabled = BtnNoThread.Enabled = true;
+            BtnStop.Enabled = false;
+
+        }
+
+        private void BtnThread_Click(object sender, EventArgs e)
+        {
+            var maxValue = 100;
+            PrgProcess.Value = 0; // 프로그래스 밸류를 0으로 초기화
+            PrgProcess.Minimum = 0;
+            PrgProcess.Maximum = maxValue;
+
+            BtnThread.Enabled = BtnNoThread.Enabled = false;
+            BtnStop.Enabled = true;
+
+            BgwProgress.WorkerReportsProgress = true; // 진행사항 리포트 활성화
+            BgwProgress.WorkerSupportsCancellation = true; // 백그라운드워커 취소 활성화
+            BgwProgress.RunWorkerAsync(null); // 백그라운드워커 실행!
+
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            BgwProgress.CancelAsync(); // 비동기로 취소실행!
+        }
+
+        #region '백그라운드워커 이벤트 핸들러'
+
+        /* 사용 하면 복잡하지만 사용하지 않으면 프로그램 응답 대기중 뜸 */
+
+        private void DoRealWork(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            var MaxValue = 100;
+            double currValue = 0;
+
+            for (var i = 0; i <= MaxValue; i++)
+            {
+                if (worker.CancellationPending) // 중간에 취소할건지 물어보는 로직
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    currValue = i;
+                    // 시간이 오래 걸리는 작업 처리
+                    Thread.Sleep(500);
+
+                    // 이하 로직 실행 시 BgwProgress_ProgressChanged 이벤트핸들러에서
+                    // ProgressChangedEventArgs 내의 ProgressPercentage 속성으로 값이 들어감
+                    worker.ReportProgress((int)((currValue / MaxValue) * 100));
+                }
+            }
+        }
+
+        /* 일을 진행 */
+        private void BgwProgress_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            DoRealWork((BackgroundWorker)sender, e);
+            e.Result = null;
+        }
+
+        /* 진행 상태 변경 표시 */
+        private void BgwProgress_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            PrgProcess.Value = e.ProgressPercentage;
+
+            // 텍스트 박스에 스레드 진행상태 표시
+            TxtLog.AppendText($"진행률 : {PrgProcess.Value}%\r\n");
+        }
+
+        /* 진행 종료 후 처리 */
+        private void BgwProgress_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                TxtLog.AppendText("작업이 취소되었습니다.\r\n");
+            }
+            else
+            {
+                TxtLog.AppendText("작업이 완료되었습니다.\r\n");
+            }
+
+            // 작업이 끝났으니 버튼 상태 변경
+            BtnNoThread.Enabled = BtnThread.Enabled = true;
+            BtnStop.Enabled = false;
+        }
+        #endregion
+    }
 }
+        #region
+
+        #endregion
