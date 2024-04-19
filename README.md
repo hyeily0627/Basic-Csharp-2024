@@ -438,6 +438,7 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
 - 토이 프로젝트
   - 윈도우 탐색기 앱 종료
     - 실행결과 
+    
     https://github.com/hyeily0627/Basic-Csharp-2024/assets/156732476/20374d95-9ee9-47e6-9ef7-6dcd7038abbc
 
   - 도서관리 앱 with SQL Server(Base) ModernUI(NuGet패키지)
