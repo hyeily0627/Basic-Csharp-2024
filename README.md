@@ -438,11 +438,20 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
 - 토이 프로젝트
   - 윈도우 탐색기 앱 종료
     - 실행결과 
-    
+
     https://github.com/hyeily0627/Basic-Csharp-2024/assets/156732476/20374d95-9ee9-47e6-9ef7-6dcd7038abbc
 
   - 도서관리 앱 with SQL Server(Base) ModernUI(NuGet패키지)
-
+    ```cs
+  
+    // 값형식 변수에 null 값을 넣을 수 있도록 만들어준 기능 Nullable
+    // 변수명 뒤에 ?만 추가할 것 
+    int? a = null; 
+    double? b = null;
+    float? c = null;
+    
+    ```
+  - 로그인 패스워드 암호화 미구현
 
 ## 8일차 
 - 토이 프로젝트
@@ -450,3 +459,10 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
   - IoT Dummy 앱 with SQL Server(IoT, DB)
   
     - 국가교통정보센터 CCTV뷰 앱(OpenAPI, NuGet dll, Network)
+
+
+## 개인 토이프로젝트
+- 심플 메모장앱
+  - 기능
+  - 특징
+  - 배운점 
