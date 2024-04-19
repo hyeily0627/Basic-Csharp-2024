@@ -440,6 +440,10 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
       - 실행결과 
 
 
+https://github.com/hyeily0627/Basic-Csharp-2024/assets/156732476/20374d95-9ee9-47e6-9ef7-6dcd7038abbc
+
+
+
 
     - ModernUI 앱(UI 디자인)
     - 도서관리 앱 with SQL Server(Base)
