@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,23 +15,25 @@ namespace NewBookRentalShopAp
 {
     public partial class FrmLogin : MetroForm
     {
+
         private bool isLogin = false;
-        private string connStriong = "Data Source=localhost;" +
+        private string connString = "Data Source=localhost;" +
                                      "Initial Catalog=BookRentalShop2024;" +
                                      "Persist Security Info=True;" +
                                      "User ID=sa;Encrypt=False;" +
                                      "Password=mssql_p@ss";
 
+        // 로그인 성공여부 저장 변수 
         private bool IsLogin
         {
-            get { return isLogin;}
-            set { isLogin = value;} 
+            get { return isLogin; }
+            set { isLogin = value; }
         }
         public FrmLogin()
         {
             InitializeComponent();
             TxtUserId.Text = string.Empty;
-            TxtPassword.Text = string.Empty;    
+            TxtPassword.Text = string.Empty;
 
         }
 
@@ -44,19 +47,19 @@ namespace NewBookRentalShopAp
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             bool isFail = false;
-            string errMsg = string.Empty;   
+            string errMsg = string.Empty;
 
-            if(string.IsNullOrEmpty(TxtUserId.Text))
-            {   
+            if (string.IsNullOrEmpty(TxtUserId.Text))
+            {
                 isFail = true;
                 errMsg += "아이디를 입력하세요.\n";
             }
-            if(string.IsNullOrEmpty(TxtPassword.Text))
+            if (string.IsNullOrEmpty(TxtPassword.Text))
             {
                 isFail = true;
                 errMsg += "패스워드를 입력하세요.\n";
             }
-            if(isFail == true)
+            if (isFail == true)
             {
                 MessageBox.Show(errMsg, "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -65,16 +68,17 @@ namespace NewBookRentalShopAp
 
             // DB연계
             IsLogin = LoginProcess();  // 로그인 성공시 True, 실패시 False 리턴함 
-            if(IsLogin) this.Close();  // 현재 로그인창 닫기 
+            if (IsLogin) this.Close();  // 현재 로그인창 닫기 
         }
 
         // 로그인 DB 처리 시작 
         private bool LoginProcess()
         {
-           string userid = TxtUserId.Text;        // 현재 DB로 넘기는 값
-           string password = TxtPassword.Text;    
-           string chkUserId = string.Empty ;      // DB에서 넘어온 값 
-           string chkPassword = string.Empty ;  
+            var md5hash = MD5.Create();
+            string userid = TxtUserId.Text;        // 현재 DB로 넘기는 값
+            string password = TxtPassword.Text;
+            string chkUserId = string.Empty;      // DB에서 넘어온 값 
+            string chkPassword = string.Empty;
 
             /*
              1. Connection 생성
@@ -88,7 +92,7 @@ namespace NewBookRentalShopAp
 
             // 연결문자열(ConnectioString) 
             // Data Source=localhost;Initial Catalog=BookRentalShop2024;Persist Security Info=True;User ID=sa;Encrypt=False;Password=mssql_p@ss
-            using (SqlConnection conn = new SqlConnection(connStriong))
+            using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
                 // @userid, @password 쿼리문 외부에서 변수값을 안전하게 주입함
@@ -100,9 +104,9 @@ namespace NewBookRentalShopAp
                 SqlCommand cmd = new SqlCommand(query, conn);
                 // @userid, @password 파라미터 할당
                 SqlParameter prmUserid = new SqlParameter("@userId", userid);
-                SqlParameter prmPassword = new SqlParameter("@Password", password);
+                SqlParameter prmPassword = new SqlParameter("@Password", GetMd5Hash(md5hash,password)); 
                 cmd.Parameters.Add(prmUserid);
-                cmd.Parameters.Add(prmPassword);    
+                cmd.Parameters.Add(prmPassword);
 
                 SqlDataReader reader = cmd.ExecuteReader(); // 
 
@@ -118,7 +122,7 @@ namespace NewBookRentalShopAp
                 else
                 {
                     MessageBox.Show("로그인 정보가 없습니다.", "DB오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    
+
                     return false;
                 }
 
@@ -127,9 +131,9 @@ namespace NewBookRentalShopAp
 
         private void TxtPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == 13) // 13  = 엔터키!
+            if (e.KeyChar == 13) // 13  = 엔터키!
             {
-                BtnLogin_Click(sender, e);  
+                BtnLogin_Click(sender, e);
             }
         }
 
@@ -140,6 +144,19 @@ namespace NewBookRentalShopAp
                 TxtPassword.Focus(); // 패스워드로 포커스 이동
             }
         }
-    }
 
+        // MD5 해시 알고리즘 암호화
+        string GetMd5Hash(MD5 md5hash, string input)
+        {
+            // 입력문자열을 byte배열로 변환한 뒤 MD5 해시 처리
+            byte[] data = md5hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                builder.Append(data[i].ToString("X2")); // 16진수 문자로 각 글자를 전부 변환
+            }
+
+            return builder.ToString();
+        }
+    }
 }
