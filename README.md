@@ -454,9 +454,9 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
   - 로그인 패스워드 암호화 미구현
 
 ## 8일차(2024-04-22)
-- 토이 프로젝트
+- 토이 프로젝트(7일차 프로젝트 계속~)
   - 도서관리 앱 관리하면 
-    - 앱 사용자 관리(관리자?) -> 완료 
+    - 앱 사용자 관리(관리자?) -> 완료(4/22) 
     - 책 장르 관리 
     - 책 정보 관리
     - 도서 회원 관리 
@@ -465,11 +465,20 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
 
 
 ## 9일차
-- 토이 프로젝트
+- 토이 프로젝트(7일차 프로젝트 계속~)
   - 도서관리 앱 관리하면 
-    - 앱 사용자 관리(관리자?) -> 완료 
-    - 책 장르 관리 
-    - 책 정보 관리
+    - 앱 사용자 관리(관리자?) -> 완료(4/22)
+    - 책 장르 관리 -> 완료(4/23)
+    - 책 정보 관리 -> 완료(4/23)
+    - 도서 회원 관리 
+    - 대출관리
+
+## 10일차
+- 토이 프로젝트(7일차 프로젝트 계속~)
+  - 도서관리 앱 관리하면 
+    - 앱 사용자 관리(관리자?) -> 완료(4/22)
+    - 책 장르 관리 -> 완료(4/23)
+    - 책 정보 관리 -> 완료(4/23)
     - 도서 회원 관리 
     - 대출관리
 
@@ -480,3 +489,7 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
   - 기능
   - 특징
   - 배운점 
+
+
+  #region
+#endregion

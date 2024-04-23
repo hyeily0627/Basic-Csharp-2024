@@ -1,5 +1,5 @@
-﻿namespace NewBookRentalShopAp
-{
+﻿namespace NewBookRentalShopApp
+{ 
     partial class FrmMain
     {
         /// <summary>
@@ -71,7 +71,7 @@
             // MnuExit
             // 
             this.MnuExit.Name = "MnuExit";
-            this.MnuExit.Size = new System.Drawing.Size(180, 22);
+            this.MnuExit.Size = new System.Drawing.Size(125, 22);
             this.MnuExit.Text = "끝내기(&X)";
             // 
             // 관리MToolStripMenuItem
@@ -106,12 +106,14 @@
             this.MnuBookDiv.Name = "MnuBookDiv";
             this.MnuBookDiv.Size = new System.Drawing.Size(180, 22);
             this.MnuBookDiv.Text = "책장르 관리";
+            this.MnuBookDiv.Click += new System.EventHandler(this.MnuBookDiv_Click);
             // 
             // MnuInfo
             // 
             this.MnuInfo.Name = "MnuInfo";
             this.MnuInfo.Size = new System.Drawing.Size(180, 22);
             this.MnuInfo.Text = "책정보 관리";
+            this.MnuInfo.Click += new System.EventHandler(this.MnuInfo_Click);
             // 
             // MnuMembers
             // 
@@ -141,7 +143,7 @@
             // MnuAbout
             // 
             this.MnuAbout.Name = "MnuAbout";
-            this.MnuAbout.Size = new System.Drawing.Size(180, 22);
+            this.MnuAbout.Size = new System.Drawing.Size(175, 22);
             this.MnuAbout.Text = "이 프로그램은...(&A)";
             // 
             // statusStrip1

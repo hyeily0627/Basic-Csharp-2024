@@ -9,16 +9,17 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using MetroFramework;
 using MetroFramework.Forms;
 
 namespace NewBookRentalShopApp
 {
-    public partial class FrmLoginUser : MetroForm
+    public partial class FrmBookDivision : MetroForm
     {
         private bool isNew = false;  // UPDATE(false), INSERT(true) 
 
-        public FrmLoginUser()
+        public FrmBookDivision()
         {
             InitializeComponent();
         }
@@ -48,15 +49,17 @@ namespace NewBookRentalShopApp
             }
             */
         }
-
+        #region '신규'버튼 이벤트 핸들러 
         private void BtnNew_Click(object sender, EventArgs e)
         {
             isNew = true;
-            TxtUserNumber.Text = TxtUserId.Text = TxtPassword.Text = string.Empty;
-            TxtUserNumber.ReadOnly = true;
-            TxtUserNumber.Focus(); //유저번호는 자동 증가로 입력안함. 아이디로 자동 포커스 
+            TxtDivison.Text = TxtNames.Text = string.Empty;
+            TxtDivison.ReadOnly = false; // 최초 입력할때는 PK값을 입력해줘야함
+            TxtDivison.Focus(); // 순번은 자동증가 하기 때문에 입력불가 
         }
+        #endregion
 
+        #region '저장'버튼 이벤트 핸들러 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             var md5hash = MD5.Create(); // MD5 암호화용 객체 생성
@@ -68,14 +71,14 @@ namespace NewBookRentalShopApp
                 MessageBox.Show("사용자 순번을 입력하세요.");
             }
             */
-            if (string.IsNullOrEmpty(TxtUserId.Text))
+            if (string.IsNullOrEmpty(TxtDivison.Text))
             {
-                MessageBox.Show("사용자 아이디를 입력하세요.");
+                MessageBox.Show("구분코드를 입력하세요.");
                 return ;
             }
-            if (string.IsNullOrEmpty(TxtPassword.Text))
+            if (string.IsNullOrEmpty(TxtNames.Text))
             {
-                MessageBox.Show("패스워드을 입력하세요.");
+                MessageBox.Show("구분명을 입력하세요.");
                 return ;
             }
 
@@ -88,32 +91,26 @@ namespace NewBookRentalShopApp
                     var query = "";
                     if (isNew) // INSERT이면
                     {
-                        query = @"INSERT INTO usertbl
-                                       (userid
-                                       ,[password])
-                                 VALUES
-                                       (@userid
-                                       ,@password)";
+                        query = @"INSERT INTO divtbl
+                                              (Division
+                                             ,Names)
+                                        VALUES
+                                              (@Division
+                                             ,@Names)";
                     }
                     else // UPDATE 
                     {
-                        query = @"UPDATE usertbl
-                                 SET userid = @userid
-                                   ,[password] = @password
-                               WHERE useridx = @useridx";
+                        query = @"UPDATE divtbl
+                                 SET Names = @Names
+                               WHERE Division = @Division";
                     }
                     SqlCommand cmd = new SqlCommand(query, conn);
 
-                    if (isNew == false) // UPDATE 시에는 @userIdx 파라미터 필요! 
-                    {
-                        SqlParameter prmUserNumber = new SqlParameter("useridx", TxtUserNumber.Text);
-                        cmd.Parameters.Add(prmUserNumber);
-                    }
-                    SqlParameter prmUserId = new SqlParameter("userId", TxtUserId.Text);
-                    SqlParameter prmPassword = new SqlParameter("password", Helper.Common.GetMd5Hash(md5hash, TxtPassword.Text));
+                    SqlParameter prmDivision = new SqlParameter("Division", TxtDivison.Text);
+                    SqlParameter prmNames = new SqlParameter("Names",TxtNames.Text);
                     // Command 에 Parameter를 연결해줘야함 
-                    cmd.Parameters.Add(prmUserId);
-                    cmd.Parameters.Add(prmPassword);
+                    cmd.Parameters.Add(prmDivision);
+                    cmd.Parameters.Add(prmNames);
 
                     var result = cmd.ExecuteNonQuery();
 
@@ -134,51 +131,17 @@ namespace NewBookRentalShopApp
                 MetroMessageBox.Show(this,$"오류 : {ex.Message}","오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
-            TxtUserNumber.Text = TxtUserId.Text = TxtPassword.Text = string.Empty;  // 입력, 수정, 삭제이후에는 모든 입력값을 지워줘야함 
+            TxtDivison.Text = TxtNames.Text = string.Empty;  // 입력, 수정, 삭제이후에는 모든 입력값을 지워줘야함 
             RefreshData();
         }
-        // 데이터 그리뷰에 데이터를 새로 부르기
-        private void RefreshData()
-        {
-           using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))
-           {
-                conn.Open();
-                var query = @"SELECT useridx 
-                                    ,userid 
-                                    ,[password] 
-                                    ,lastLoginDateTime
-                                FROM usertbl";
-                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds, "usertbl");
+        #endregion
 
-                DgvResult.DataSource = ds.Tables[0];
-                DgvResult.ReadOnly = true;  // 수정불가
-                DgvResult.Columns[0].HeaderText = "사용자 순번";
-                DgvResult.Columns[1].HeaderText = "아이디";
-                DgvResult.Columns[2].HeaderText = "패스워드";
-                DgvResult.Columns[3].HeaderText = "마지막 로그인날짜";
-            }
-        }
-
-        private void DgvResult_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex  > -1 ) // 아무것도 선택하지 않으면 -1 
-            {
-                var selData = DgvResult.Rows[e.RowIndex]; // 내가 선택한 인덱스 값 
-                TxtUserNumber.Text = selData.Cells[0].Value.ToString();
-                TxtUserNumber.ReadOnly = true;
-                TxtUserId.Text = selData.Cells[1].Value.ToString();
-                TxtPassword.Text = selData.Cells[2].Value.ToString();
-            }
-        }
-
+        #region '삭제'버튼 이벤트 핸들러
         private void BtnDel_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(TxtUserNumber.Text))// 사용자 아이디 순번아 없으면
+            if (string.IsNullOrEmpty(TxtDivison.Text))// 구분코드가 없으면 
             {
-                MetroMessageBox.Show(this, "삭제할 사용자를 선택하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "삭제할 구분코드를 선택하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             var answer = MetroMessageBox.Show(this, "정말 삭제하시겠습니까?.", "삭제여부", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -190,12 +153,12 @@ namespace NewBookRentalShopApp
             using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))
             {
                 conn.Open();
-                var query = @"DELETE FROM usertbl WHERE useridx = @useridx";
+                var query = @"DELETE FROM divtbl WHERE Division = @Division";
 
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                SqlParameter prmUserNumber = new SqlParameter("@useridx", TxtUserNumber.Text);
-                cmd.Parameters.Add(prmUserNumber);
+                SqlParameter prmDivision = new SqlParameter("@Division", TxtDivison.Text);
+                cmd.Parameters.Add(prmDivision);
 
                 var result = cmd.ExecuteNonQuery();
 
@@ -209,10 +172,44 @@ namespace NewBookRentalShopApp
                 }
             }
 
-            TxtUserNumber.Text = TxtUserId.Text = TxtPassword.Text = string.Empty;
+            TxtDivison.Text = TxtNames.Text = string.Empty;
             RefreshData();
         }
+        #endregion
 
+        #region 데이터 그리뷰에 데이터를 새로 부르기
+        private void RefreshData()
+        {
+           using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))
+           {
+                conn.Open();
+                var query = @"SELECT Division
+                                    ,Names
+                                FROM divtbl"; // 화면에 필요한 테이블 쿼리 변경
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "divtbl");
+
+                DgvResult.DataSource = ds.Tables[0];
+                DgvResult.ReadOnly = true;  // 수정불가
+                DgvResult.Columns[0].HeaderText = "구분코드";
+                DgvResult.Columns[1].HeaderText = "구분명";
+            }
+        }
+        #endregion
+
+        private void DgvResult_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex  > -1 ) // 아무것도 선택하지 않으면 -1 
+            {
+                var selData = DgvResult.Rows[e.RowIndex]; // 내가 선택한 인덱스 값 
+                TxtDivison.Text = selData.Cells[0].Value.ToString();
+                TxtNames.Text = selData.Cells[1].Value.ToString();
+                TxtDivison.ReadOnly = true; // UPDATE시 PK인 Division을 변경하면 안됨
+
+                isNew = false; //UPDATE
+            }
+        }
     }
 }
 

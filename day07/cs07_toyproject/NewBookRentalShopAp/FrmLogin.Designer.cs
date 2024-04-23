@@ -1,4 +1,4 @@
-﻿namespace NewBookRentalShopAp
+﻿namespace NewBookRentalShopApp
 {
     partial class FrmLogin
     {
