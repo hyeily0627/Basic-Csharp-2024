@@ -33,17 +33,17 @@
             this.파일FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.관리MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuLoginUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MnuBookDiv = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuMembers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuRental = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.MnuLoginUsers = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuBookDiv = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuMembers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -88,38 +88,10 @@
             this.관리MToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.관리MToolStripMenuItem.Text = "관리(&M)";
             // 
-            // MnuLoginUsers
-            // 
-            this.MnuLoginUsers.Image = global::NewBookRentalShopAp.Properties.Resources.login;
-            this.MnuLoginUsers.Name = "MnuLoginUsers";
-            this.MnuLoginUsers.Size = new System.Drawing.Size(180, 22);
-            this.MnuLoginUsers.Text = "로그인사용자 관리";
-            this.MnuLoginUsers.Click += new System.EventHandler(this.MnuLoginUsers_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // MnuBookDiv
-            // 
-            this.MnuBookDiv.Name = "MnuBookDiv";
-            this.MnuBookDiv.Size = new System.Drawing.Size(180, 22);
-            this.MnuBookDiv.Text = "책장르 관리";
-            this.MnuBookDiv.Click += new System.EventHandler(this.MnuBookDiv_Click);
-            // 
-            // MnuInfo
-            // 
-            this.MnuInfo.Name = "MnuInfo";
-            this.MnuInfo.Size = new System.Drawing.Size(180, 22);
-            this.MnuInfo.Text = "책정보 관리";
-            this.MnuInfo.Click += new System.EventHandler(this.MnuInfo_Click);
-            // 
-            // MnuMembers
-            // 
-            this.MnuMembers.Name = "MnuMembers";
-            this.MnuMembers.Size = new System.Drawing.Size(180, 22);
-            this.MnuMembers.Text = "도서회원 관리";
             // 
             // toolStripSeparator2
             // 
@@ -128,6 +100,7 @@
             // 
             // MnuRental
             // 
+            this.MnuRental.Image = global::NewBookRentalShopAp.Properties.Resources.rental;
             this.MnuRental.Name = "MnuRental";
             this.MnuRental.Size = new System.Drawing.Size(180, 22);
             this.MnuRental.Text = "대출 관리";
@@ -161,6 +134,37 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(79, 17);
             this.toolStripStatusLabel1.Text = "로그인아이디";
+            // 
+            // MnuLoginUsers
+            // 
+            this.MnuLoginUsers.Image = global::NewBookRentalShopAp.Properties.Resources.login;
+            this.MnuLoginUsers.Name = "MnuLoginUsers";
+            this.MnuLoginUsers.Size = new System.Drawing.Size(180, 22);
+            this.MnuLoginUsers.Text = "로그인사용자 관리";
+            this.MnuLoginUsers.Click += new System.EventHandler(this.MnuLoginUsers_Click);
+            // 
+            // MnuBookDiv
+            // 
+            this.MnuBookDiv.Image = global::NewBookRentalShopAp.Properties.Resources.division;
+            this.MnuBookDiv.Name = "MnuBookDiv";
+            this.MnuBookDiv.Size = new System.Drawing.Size(180, 22);
+            this.MnuBookDiv.Text = "책장르 관리";
+            this.MnuBookDiv.Click += new System.EventHandler(this.MnuBookDiv_Click);
+            // 
+            // MnuInfo
+            // 
+            this.MnuInfo.Image = global::NewBookRentalShopAp.Properties.Resources.book;
+            this.MnuInfo.Name = "MnuInfo";
+            this.MnuInfo.Size = new System.Drawing.Size(180, 22);
+            this.MnuInfo.Text = "책정보 관리";
+            this.MnuInfo.Click += new System.EventHandler(this.MnuInfo_Click);
+            // 
+            // MnuMembers
+            // 
+            this.MnuMembers.Image = global::NewBookRentalShopAp.Properties.Resources.member;
+            this.MnuMembers.Name = "MnuMembers";
+            this.MnuMembers.Size = new System.Drawing.Size(180, 22);
+            this.MnuMembers.Text = "도서회원 관리";
             // 
             // FrmMain
             // 

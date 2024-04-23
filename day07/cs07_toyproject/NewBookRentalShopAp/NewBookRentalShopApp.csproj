@@ -132,6 +132,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="books.ico" />
+    <None Include="imgs\rental.png" />
+    <None Include="imgs\member.png" />
+    <None Include="imgs\book.png" />
+    <None Include="imgs\division.png" />
     <None Include="Resources\login.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

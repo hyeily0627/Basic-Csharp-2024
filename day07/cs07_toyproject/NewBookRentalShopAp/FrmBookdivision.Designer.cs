@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBookDivision));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.DgvResult = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -138,6 +139,7 @@
             this.TxtNames.MaxLength = 32767;
             this.TxtNames.Name = "TxtNames";
             this.TxtNames.PasswordChar = '\0';
+            this.TxtNames.PromptText = "구분명 입력";
             this.TxtNames.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.TxtNames.SelectedText = "";
             this.TxtNames.SelectionLength = 0;
@@ -169,6 +171,7 @@
             this.TxtDivison.MaxLength = 32767;
             this.TxtDivison.Name = "TxtDivison";
             this.TxtDivison.PasswordChar = '\0';
+            this.TxtDivison.PromptText = "구분코드 입력";
             this.TxtDivison.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.TxtDivison.SelectedText = "";
             this.TxtDivison.SelectionLength = 0;
@@ -210,6 +213,7 @@
             this.ClientSize = new System.Drawing.Size(755, 320);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("나눔스퀘어_ac Bold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmBookDivision";
             this.Padding = new System.Windows.Forms.Padding(20, 65, 20, 22);
             this.Text = "책장르";
