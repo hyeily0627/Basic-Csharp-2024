@@ -43,22 +43,23 @@ namespace hansot_pos
             this.tablePanel.ColumnCount = 2;
             this.tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tablePanel.Location = new System.Drawing.Point(12, 12);
+            this.tablePanel.Location = new System.Drawing.Point(14, 15);
+            this.tablePanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tablePanel.Name = "tablePanel";
             this.tablePanel.RowCount = 3;
             this.tablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tablePanel.Size = new System.Drawing.Size(950, 737);
+            this.tablePanel.Size = new System.Drawing.Size(1086, 921);
             this.tablePanel.TabIndex = 0;
             // 
             // NowDate
             // 
             this.NowDate.AutoSize = true;
             this.NowDate.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.NowDate.Location = new System.Drawing.Point(983, 34);
+            this.NowDate.Location = new System.Drawing.Point(1123, 42);
             this.NowDate.Name = "NowDate";
-            this.NowDate.Size = new System.Drawing.Size(230, 48);
+            this.NowDate.Size = new System.Drawing.Size(281, 60);
             this.NowDate.TabIndex = 1;
             this.NowDate.Text = "NowDate";
             // 
@@ -66,9 +67,9 @@ namespace hansot_pos
             // 
             this.NowTime.AutoSize = true;
             this.NowTime.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.NowTime.Location = new System.Drawing.Point(983, 89);
+            this.NowTime.Location = new System.Drawing.Point(1123, 111);
             this.NowTime.Name = "NowTime";
-            this.NowTime.Size = new System.Drawing.Size(234, 48);
+            this.NowTime.Size = new System.Drawing.Size(285, 60);
             this.NowTime.TabIndex = 2;
             this.NowTime.Text = "NowTime";
             // 
@@ -76,9 +77,10 @@ namespace hansot_pos
             // 
             this.StatBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.StatBtn.Font = new System.Drawing.Font("굴림", 18F);
-            this.StatBtn.Location = new System.Drawing.Point(976, 443);
+            this.StatBtn.Location = new System.Drawing.Point(1115, 554);
+            this.StatBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.StatBtn.Name = "StatBtn";
-            this.StatBtn.Size = new System.Drawing.Size(396, 150);
+            this.StatBtn.Size = new System.Drawing.Size(453, 188);
             this.StatBtn.TabIndex = 4;
             this.StatBtn.Text = "통계";
             this.StatBtn.UseVisualStyleBackColor = false;
@@ -88,9 +90,10 @@ namespace hansot_pos
             // 
             this.ExitBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.ExitBtn.Font = new System.Drawing.Font("굴림", 18F);
-            this.ExitBtn.Location = new System.Drawing.Point(976, 599);
+            this.ExitBtn.Location = new System.Drawing.Point(1115, 749);
+            this.ExitBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ExitBtn.Name = "ExitBtn";
-            this.ExitBtn.Size = new System.Drawing.Size(396, 150);
+            this.ExitBtn.Size = new System.Drawing.Size(453, 188);
             this.ExitBtn.TabIndex = 5;
             this.ExitBtn.Text = "종료";
             this.ExitBtn.UseVisualStyleBackColor = false;
@@ -98,16 +101,17 @@ namespace hansot_pos
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.ClientSize = new System.Drawing.Size(1582, 951);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.StatBtn);
             this.Controls.Add(this.NowTime);
             this.Controls.Add(this.NowDate);
             this.Controls.Add(this.tablePanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "main";
