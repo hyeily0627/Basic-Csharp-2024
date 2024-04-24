@@ -7,30 +7,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework;
 using MetroFramework.Forms;
 
 namespace NewBookRentalShopApp
 {
     public partial class FrmMain : MetroForm
     {
-        // 각 화면을 초기화 
+        #region 각 화면을 초기화 (클래스 초기화)
+        // F12 눌러서 확인해보면 Frm~ 은 클래스❗❗❗ frm~ 은 객체변수 ❗❗❗
         FrmLoginUser frmLoginUser = null;   // 객체를 메서드로 생성 
         FrmBookDivision frmbookdivision = null;
-        FrmBookInfo frmbookinfo = null; 
+        FrmBookInfo frmbookinfo = null;
+        FrmMember frmmember = null;
+        FrmBookRental frmBookRental = null; 
+        #endregion
 
+        #region FrmMain 
         public FrmMain()
         {
             InitializeComponent();
         }
+        #endregion
 
         #region 폼로드 이벤트 핸들러 : 로그인창 먼저 띄우기! 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            FrmLogin frm = new FrmLogin(); 
+            FrmLogin frm = new FrmLogin();
+
             //frm.Parent = this;  // FrmMain이 부모창 설정
-            frm.StartPosition = FormStartPosition.CenterScreen; 
+            frm.StartPosition = FormStartPosition.CenterScreen;
             frm.TopMost = true;  // 윈도우 화면 상단에 
-            frm.ShowDialog();   
+            frm.ShowDialog();
+
+            LblLoginId.Text = Helper.Common.LoginId;  
         }
         #endregion
 
@@ -57,7 +67,21 @@ namespace NewBookRentalShopApp
         }
         #endregion
 
+        #region '도서회원 관리' 메뉴 클릭 이벤트 핸들러 
+        private void MnuMembers_Click(object sender, EventArgs e)
+        {
+            frmmember = ShowActiveForm(frmmember, typeof(FrmMember)) as FrmMember;
+        }
+        #endregion
 
+        #region '대출관리' 메뉴 클릭 이벤트 핸들러
+        private void MnuRental_Click(object sender, EventArgs e)
+        {
+            frmBookRental = ShowActiveForm(frmBookRental, typeof(FrmBookRental)) as FrmBookRental;
+        }
+        #endregion
+
+        #region 창 컨트롤링
         Form ShowActiveForm(Form form,Type type)
         {
             if (form == null) // 화면이 한번도 안열렸으면 
@@ -83,6 +107,28 @@ namespace NewBookRentalShopApp
             }
             return form;
         }
+        #endregion
 
+        #region 폼 닫기 컨트롤링 
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var res = MetroMessageBox.Show(this, "종료하시겠습니까?", "종료여부", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.No) 
+            {
+                e.Cancel = true;  
+            }
+            else 
+            {
+                Environment.Exit(0);           
+            }
+        }
+        #endregion
+
+        private void MnuAbout_Click(object sender, EventArgs e)
+        {
+            FrmAbout popup = new FrmAbout();    
+            popup.StartPosition = FormStartPosition.CenterParent;
+            popup.ShowDialog(); 
+        }
     }
 }

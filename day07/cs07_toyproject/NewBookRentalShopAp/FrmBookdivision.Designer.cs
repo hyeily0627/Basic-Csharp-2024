@@ -139,7 +139,6 @@
             this.TxtNames.MaxLength = 32767;
             this.TxtNames.Name = "TxtNames";
             this.TxtNames.PasswordChar = '\0';
-            this.TxtNames.PromptText = "구분명 입력";
             this.TxtNames.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.TxtNames.SelectedText = "";
             this.TxtNames.SelectionLength = 0;
@@ -171,7 +170,6 @@
             this.TxtDivison.MaxLength = 32767;
             this.TxtDivison.Name = "TxtDivison";
             this.TxtDivison.PasswordChar = '\0';
-            this.TxtDivison.PromptText = "구분코드 입력";
             this.TxtDivison.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.TxtDivison.SelectedText = "";
             this.TxtDivison.SelectionLength = 0;

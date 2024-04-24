@@ -59,7 +59,7 @@ namespace NewBookRentalShopApp
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 
@@ -84,7 +84,7 @@ namespace NewBookRentalShopApp
         #region '저장'버튼 이벤트 핸들러 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            var md5hash = MD5.Create(); // MD5 암호화용 객체 생성
+            //var md5hash = MD5.Create(); // MD5 암호화용 객체 생성
 
             // 입력검증(Validation check), 아이디, 패스워드를 안넣으면 
             /*
@@ -270,12 +270,12 @@ namespace NewBookRentalShopApp
                 adapter.Fill(ds, "bookstbl");
 
                 DgvResult.DataSource = ds.Tables[0];
-                
+                DgvResult.ReadOnly = true;
+
                 DgvResult.Columns[0].HeaderText = "책순번";
                 DgvResult.Columns[1].HeaderText = "저자명";
                 DgvResult.Columns[2].HeaderText = "구분코드";
                 DgvResult.Columns[3].HeaderText = "구분명"; // -> 구분명 새로추가 
-
                 DgvResult.Columns[4].HeaderText = "책제목";
                 DgvResult.Columns[5].HeaderText = "출판일";
                 DgvResult.Columns[6].HeaderText = "ISBN";
@@ -285,7 +285,6 @@ namespace NewBookRentalShopApp
                 DgvResult.Columns[0].Width = 30;  // 책순번
                 DgvResult.Columns[1].Width = 130; // 저자명
                 DgvResult.Columns[2].Visible = false; // 구분코드 숨겨버리기!
-
                 DgvResult.Columns[4].Width = 160; // 책제목
                 DgvResult.Columns[5].Width = 75;  // 출판일
                 DgvResult.Columns[7].Width = 50;  // 책가격
@@ -293,6 +292,7 @@ namespace NewBookRentalShopApp
         }
         #endregion
 
+        # region 셀 선택 컨트롤
         private void DgvResult_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex  > -1 ) // 아무것도 선택하지 않으면 -1 
@@ -318,6 +318,17 @@ namespace NewBookRentalShopApp
                 isNew = false; //UPDATE
             }
         }
+        #endregion
+
+        #region ISBN에 숫자만 입력되도록 처리 
+        private void TxtIsbn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        #endregion
     }
 }
 

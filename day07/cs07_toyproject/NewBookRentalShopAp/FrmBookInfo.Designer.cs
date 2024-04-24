@@ -188,10 +188,9 @@
             this.TxtIsbn.CustomButton.Visible = false;
             this.TxtIsbn.Lines = new string[0];
             this.TxtIsbn.Location = new System.Drawing.Point(123, 195);
-            this.TxtIsbn.MaxLength = 32767;
+            this.TxtIsbn.MaxLength = 13;
             this.TxtIsbn.Name = "TxtIsbn";
             this.TxtIsbn.PasswordChar = '\0';
-            this.TxtIsbn.PromptText = "ISBN 입력";
             this.TxtIsbn.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.TxtIsbn.SelectedText = "";
             this.TxtIsbn.SelectionLength = 0;
@@ -203,6 +202,7 @@
             this.TxtIsbn.WaterMark = "ISBN 입력";
             this.TxtIsbn.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.TxtIsbn.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.TxtIsbn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtIsbn_KeyPress);
             // 
             // TxtNames
             // 
@@ -223,7 +223,6 @@
             this.TxtNames.MaxLength = 32767;
             this.TxtNames.Name = "TxtNames";
             this.TxtNames.PasswordChar = '\0';
-            this.TxtNames.PromptText = "구분명 입력";
             this.TxtNames.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.TxtNames.SelectedText = "";
             this.TxtNames.SelectionLength = 0;
@@ -276,7 +275,6 @@
             this.TxtAuthor.MaxLength = 32767;
             this.TxtAuthor.Name = "TxtAuthor";
             this.TxtAuthor.PasswordChar = '\0';
-            this.TxtAuthor.PromptText = "저자명 입력";
             this.TxtAuthor.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.TxtAuthor.SelectedText = "";
             this.TxtAuthor.SelectionLength = 0;

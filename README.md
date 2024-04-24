@@ -443,13 +443,11 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
 
   - 도서관리 앱 with SQL Server(Base) ModernUI(NuGet패키지)
     ```cs
-  
     // 값형식 변수에 null 값을 넣을 수 있도록 만들어준 기능 Nullable
     // 변수명 뒤에 ?만 추가할 것 
     int? a = null; 
     double? b = null;
     float? c = null;
-    
     ```
   - 로그인 패스워드 암호화 미구현
 
@@ -463,7 +461,6 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
     - 대출관리
     - 이 프로그램은...
 
-
 ## 9일차
 - 토이 프로젝트(7일차 프로젝트 계속~)
   - 도서관리 앱 관리하면 
@@ -472,6 +469,7 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
     - 책 정보 관리 -> 완료(4/23)
     - 도서 회원 관리 
     - 대출관리
+    - 이 프로그램은...
 
 ## 10일차
 - 토이 프로젝트(7일차 프로젝트 계속~)
@@ -479,8 +477,17 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
     - 앱 사용자 관리(관리자?) -> 완료(4/22)
     - 책 장르 관리 -> 완료(4/23)
     - 책 정보 관리 -> 완료(4/23)
-    - 도서 회원 관리 
-    - 대출관리
+    - 도서 회원 관리 -> 완료(4/24)
+    - 대출관리 -> 완료(4/24)
+    - 이 프로그램은... 
+    - 프로그램 완성
+    ![중간결과](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs010.png)
+
+## 11일차 
+
+
+
+
 
   - IoT Dummy 앱 with SQL Server(IoT, DB)
     - 국가교통정보센터 CCTV뷰 앱(OpenAPI, NuGet dll, Network)
@@ -490,6 +497,5 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
   - 특징
   - 배운점 
 
-
-  #region
+#region
 #endregion

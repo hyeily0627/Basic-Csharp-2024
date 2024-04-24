@@ -7,11 +7,12 @@ namespace NewBookRentalShopApp.Helper
     #region static(정적)으로 만드는 공통 연결 문자열
     public class Common
     {
-        public static string ConnString = "Data Source=localhost;" +
+        public static readonly string ConnString = "Data Source=localhost;" +
                                           "Initial Catalog=BookRentalShop2024;" +
                                           "Persist Security Info=True;" +
                                           "User ID=sa;Encrypt=False;" +
                                           "Password=mssql_p@ss";
+
         /*
          private string connString = "Data Source=localhost;" +
                                      "Initial Catalog=BookRentalShop2024;" +
@@ -22,6 +23,16 @@ namespace NewBookRentalShopApp.Helper
         => 앞서 만든 connString 대신 Helper.Common.ConnString 으로 대체! 
         
         */
+
+        public static string LoginId { get; set; }
+
+        // 회원선택 팝업에서 대출화면으로 넘길 데이터 정적 프로퍼티
+
+        public static string SelMemberIdx{ get; set; }
+        public static string SelMemberName{ get; set; }
+        public static string SelBookIdx{ get; set; }
+        public static string SelBookName{ get; set; } 
+
 
         #endregion
 
