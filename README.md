@@ -484,11 +484,6 @@ Smart Factory, KIOSK, Mobile(MAUI)Android, IOS, Windows phone, Unity(Gameclient)
     ![중간결과](https://raw.githubusercontent.com/hyeily0627/Basic-Csharp-2024/main/images/cs010.png)
 
 ## 11일차 
-
-
-
-
-
   - IoT Dummy 앱 with SQL Server(IoT, DB)
     - 국가교통정보센터 CCTV뷰 앱(OpenAPI, NuGet dll, Network)
 
